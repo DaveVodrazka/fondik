@@ -5,6 +5,7 @@ import { ZoneNames } from './types/ads';
 import GoogleAds from './ads/GoogleAds';
 import { VIEWPORT_BREAKPOINT } from './constants';
 import StickySky from './StickySky';
+import AdSenseAds from './ads/AdSense';
 
 const setupAdvertisment = () => {
 	utmToLinks();
@@ -51,7 +52,7 @@ const setupAdvertisment = () => {
 				.callAds();
 		} else {
 			debug('google mobile ads');
-			googleAdManager
+			new AdSenseAds()
 				.addZone(ZoneNames.MOBILE_TOP)
 				.addZone(ZoneNames.MOBILE_MID)
 				.addZone(ZoneNames.MOBILE_BOT)

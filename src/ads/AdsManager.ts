@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
+import { debug } from '../utils/debug';
+
 export default class AdsManager {
 	protected scriptSrc: string;
 	protected scriptTag: HTMLScriptElement | null = null;
@@ -17,9 +19,9 @@ export default class AdsManager {
 	executeQueue() {}
 
 	initializeAds() {
-		console.log('ADS INIT');
 		this.prepareBody();
 		this.executeQueue();
+		debug('Ads initialised');
 	}
 
 	callAds(): void {
