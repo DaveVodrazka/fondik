@@ -2,7 +2,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-	entry: './src/index.js',
+	entry: './src/main.ts',
 	module: {
 		rules: [
 			{
@@ -10,10 +10,15 @@ module.exports = {
 				exclude: /node_modules/,
 				use: ['babel-loader'],
 			},
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader',
+				exclude: /node_modules/,
+			},
 		],
 	},
 	resolve: {
-		extensions: ['*', '.js'],
+		extensions: ['.tsx', '.ts', '.js'],
 	},
 	plugins: [
 		new CopyPlugin({
