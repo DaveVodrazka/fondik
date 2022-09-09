@@ -1,8 +1,8 @@
 {
 	"name": "fondik",
-	"version": "1.0.0",
+	"version": "1.4.0",
 	"description": "Codebase for the site www.fondik.cz",
-	"main": "index.js",
+	"main": "main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "webpack --mode production",
