@@ -1,21 +1,29 @@
-import { Sides, StickySkyOptions } from '../types/stickySky';
+import {
+	Sides,
+	StickySkyCustomOptions,
+	StickySkyOptions,
+} from '../types/stickySky';
 
 export default class StickySky {
 	private options: StickySkyOptions = {
 		top: 325,
 		bot: 600,
 		side: Sides.RIGHT,
+		width: 300,
+		height: 600,
 	};
 	private holder: HTMLElement = document.createElement('div');
 	private sky: HTMLElement = document.createElement('div');
 	private topSponsor: HTMLElement | null = null;
 
-	constructor(options) {
+	constructor(options?: StickySkyCustomOptions) {
 		for (const o in options) {
 			this.options[o] = options[o];
 		}
-		this.createSky();
+
 		this.preparePage();
+		this.createSky();
+
 		window.addEventListener('scroll', this.stick.bind(this));
 	}
 
@@ -35,8 +43,8 @@ export default class StickySky {
 
 		// holder style
 		this.holder.style.position = 'absolute';
-		this.holder.style.top = top + 'px';
-		this.holder.style.width = '300px';
+		this.holder.style.top = this.options.top + 'px';
+		this.holder.style.width = `${this.options.width}px`;
 		this.holder.style.bottom = '0';
 		if (this.options.side == Sides.LEFT) {
 			this.holder.style.left = '0';
@@ -46,14 +54,14 @@ export default class StickySky {
 
 		// sky style
 		this.sky.style.position = 'absolue';
-		this.sky.style.width = '300px';
-		this.sky.style.height = '600px';
+		this.sky.style.width = `${this.options.width}px`;
+		this.sky.style.height = `${this.options.height}px`;
 		this.sky.id = 'ssp-zone-118569';
 	}
 
 	private stick() {
 		const rect = this.holder.getBoundingClientRect();
-		if (rect.bottom > this.options.bot && rect.top < this.options.top) {
+		if (rect.bottom > this.options.height && rect.top < 0) {
 			this.sky.style.position = 'fixed';
 			this.sky.style.top = '25px';
 			this.sky.style.bottom = '';

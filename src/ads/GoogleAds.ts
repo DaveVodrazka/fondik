@@ -3,6 +3,7 @@ import AdsManager from './AdsManager';
 import { getZoneElementMap } from './zones/commonZones';
 import { adSenseCodeMap } from './zones/adSenseZones';
 import { fixLeaderboard } from './utils/seznam';
+import { debug } from '../utils/debug';
 
 declare global {
 	interface Window {
@@ -35,6 +36,10 @@ export default class GoogleAds extends AdsManager {
 
 	public addZone(zone: ZoneNames): GoogleAds {
 		const zoneElement = this.zoneElementMap.get(zone);
+		if (!zoneElement) {
+			debug(`Could not get zone ${zone}`);
+			return this;
+		}
 		if (zone == ZoneNames.LEADERBOARD) {
 			fixLeaderboard();
 		}
