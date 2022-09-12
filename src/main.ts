@@ -40,11 +40,10 @@ const setupAdvertisment = () => {
 				.callAds();
 		}
 	} else {
-		const googleAdManager = new GoogleAds();
 		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 			debug('google desktop ads');
-			new StickySky();
-			googleAdManager
+			new StickySky({ top: 0, stickyTopSponsor: true });
+			new GoogleAds()
 				.addZone(ZoneNames.TOP_SPONZOR)
 				.addZone(ZoneNames.SKY_SCRAPER)
 				.addZone(ZoneNames.RECTANGLE)

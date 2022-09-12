@@ -7,6 +7,7 @@ export type StickySkyCustomOptions = {
 	top?: number;
 	bot?: number;
 	side?: Sides;
+	stickyTopSponsor?: boolean;
 };
 
 export type StickySkyOptions = {
@@ -15,4 +16,5 @@ export type StickySkyOptions = {
 	side: Sides;
 	height: number;
 	width: number;
+	stickyTopSponsor: boolean;
 };

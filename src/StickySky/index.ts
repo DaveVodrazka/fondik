@@ -11,10 +11,10 @@ export default class StickySky {
 		side: Sides.RIGHT,
 		width: 300,
 		height: 600,
+		stickyTopSponsor: false,
 	};
 	private holder: HTMLElement = document.createElement('div');
 	private sky: HTMLElement = document.createElement('div');
-	private topSponsor: HTMLElement | null = null;
 
 	constructor(options?: StickySkyCustomOptions) {
 		for (const o in options) {
@@ -56,7 +56,30 @@ export default class StickySky {
 		this.sky.style.position = 'absolue';
 		this.sky.style.width = `${this.options.width}px`;
 		this.sky.style.height = `${this.options.height}px`;
-		this.sky.id = 'ssp-zone-118569';
+
+		// sky content
+		const skyContent = document.createElement('div');
+		skyContent.id = 'ssp-zone-118569';
+		skyContent.style.height = '600px';
+		this.sky.appendChild(skyContent);
+
+		if (this.options.stickyTopSponsor) {
+			this.stickyTopSponsor();
+		}
+	}
+
+	private stickyTopSponsor() {
+		// remove original topSponzor
+		const original = document.getElementById('ssp-zone-118564');
+		if (original) {
+			original.parentElement.removeChild(original);
+		}
+
+		const topSponsor = document.createElement('div');
+		topSponsor.id = 'ssp-zone-118564';
+		topSponsor.style.marginBottom = '25px';
+		topSponsor.style.height = '300px';
+		this.sky.prepend(topSponsor);
 	}
 
 	private stick() {

@@ -2,6 +2,7 @@ import { zoneMap } from './zones/sznZones';
 import { SznZone, SznZoneList, ZoneNames } from '../types/ads';
 import AdsManager from './AdsManager';
 import { fixLeaderboard, prepareBranding } from './utils/seznam';
+import { getZoneElementMap } from './zones/commonZones';
 
 type SSSP = {
 	getAds: (z: SznZoneList) => void;
@@ -24,16 +25,30 @@ export default class SeznamAds extends AdsManager {
 	}
 
 	addZone(zone: ZoneNames): SeznamAds {
+		const zoneData = zoneMap.get(zone);
+
 		if (zone == ZoneNames.LEADERBOARD) {
 			fixLeaderboard();
 			if (window.innerWidth >= 1366) {
 				this.zoneList.push(prepareBranding());
 				return this;
 			}
-			this.zoneList.push(zoneMap.get(zone));
+			this.zoneList.push(zoneData);
 			return this;
 		}
-		this.zoneList.push(zoneMap.get(zone));
+		if (zone == ZoneNames.RECTANGLE) {
+			const elem = getZoneElementMap().get(zone);
+			elem.className = 'bottomrectangle';
+			elem.style.display = 'block';
+			elem.style.height = 'auto';
+		}
+		if (zone == ZoneNames.RECTANGLE2) {
+			const elem = getZoneElementMap().get(zone);
+			elem.className = 'textadblock';
+			elem.style.display = 'block';
+			elem.style.height = 'auto';
+		}
+		this.zoneList.push(zoneData);
 		return this;
 	}
 

@@ -12,6 +12,7 @@ declare global {
 
 export default class AdSenseAds extends AdsManager {
 	private zoneElementMap: ZoneElementMap;
+	private adCount = 0;
 
 	constructor() {
 		super();
@@ -33,15 +34,18 @@ export default class AdSenseAds extends AdsManager {
 
 	appendAd(adAttributes: AdSenseCode, zone: HTMLElement) {
 		const ins = document.createElement('ins');
+		const script = document.createElement('script');
 		for (const [k, v] of adAttributes) {
 			ins.setAttribute(k, v);
 		}
 		ins.setAttribute('class', 'adsbygoogle');
 		ins.setAttribute('data-ad-client', 'ca-pub-1062420095711039');
+		script.src = this.scriptSrc;
 
 		zone.style.display = 'block';
 		zone.appendChild(ins);
-		(window.adsbygoogle || []).push({});
+		zone.appendChild(script);
+		this.adCount++;
 	}
 
 	addZone(zone: ZoneNames): AdSenseAds {
@@ -54,5 +58,11 @@ export default class AdSenseAds extends AdsManager {
 		}
 		this.appendAd(adSenseCodeMap.get(zone), zoneElement);
 		return this;
+	}
+
+	executeQueue(): void {
+		for (let i = 0; i < this.adCount; i++) {
+			(window.adsbygoogle || []).push({});
+		}
 	}
 }
