@@ -4,7 +4,7 @@ const debugEnabled = window.location.search.indexOf('adsdebug=1') !== -1;
 
 /**
  * Logs message into console if proper UTM set to truthy value.
- * @param {String} message - Message to be logged (warned or errored).
+ * @param {any} message - Message to be logged (warned or errored).
  * @param {('log'|'warn'|'error')} type - Type of console, if not specified defaults to "log".
  */
 const debug = (message, type = 'log') => {
