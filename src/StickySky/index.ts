@@ -69,14 +69,7 @@ export default class StickySky {
 	}
 
 	private stickyTopSponsor() {
-		// remove original topSponzor
-		const original = document.getElementById('ssp-zone-118564');
-		if (original) {
-			original.parentElement.removeChild(original);
-		}
-
-		const topSponsor = document.createElement('div');
-		topSponsor.id = 'ssp-zone-118564';
+		const topSponsor = document.getElementById('ssp-zone-118564');
 		topSponsor.style.marginBottom = '25px';
 		topSponsor.style.height = '300px';
 		this.sky.prepend(topSponsor);

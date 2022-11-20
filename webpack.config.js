@@ -2,14 +2,9 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-	entry: './src/main.ts',
+	entry: { main: './src/main.ts', expose: './src/expose.ts' },
 	module: {
 		rules: [
-			{
-				test: /\.(js)$/,
-				exclude: /node_modules/,
-				use: ['babel-loader'],
-			},
 			{
 				test: /\.tsx?$/,
 				use: 'ts-loader',
@@ -26,7 +21,7 @@ module.exports = {
 		}),
 	],
 	output: {
-		filename: 'main.js',
+		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 };

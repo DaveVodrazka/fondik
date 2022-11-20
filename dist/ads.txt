@@ -1,7 +1,6 @@
 appnexus.com, 6974, RESELLER, f5ab79cb980f11d1
 pubmatic.com, 49307, RESELLER, 5d62403b186f2ace
 pubmatic.com, 159961, RESELLER, 5d62403b186f2ace
-## FatChilli ads.txt start
 fatchilli.media, FCAdX-55297863, DIRECT,
 google.com, pub-2610964203515025, DIRECT, f08c47fec0942fa0
 google.com, pub-2393320645055022, RESELLER, f08c47fec0942fa0
@@ -23,5 +22,4 @@ contextweb.com, 560606, RESELLER, 89ff185a4c4e857c
 triplelift.com, 12404, DIRECT, 6c33edb13117fd86
 triplelift.com, 12404-EB, DIRECT, 6c33edb13117fd86
 inmobi.com, 96b0c131516c4ce58d293ec158228a2f, DIRECT, 83e75a7ae333ca9d
-fatchillimedia.com,22754793592,DIRECT
-## FatChilli ads.txt end
+fatchillimedia.com, 22754793592, DIRECT
