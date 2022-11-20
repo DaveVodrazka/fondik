@@ -23,8 +23,7 @@
 	},
 	"homepage": "https://github.com/DaveVodrazka/fondik#readme",
 	"browserslist": [
-		"defaults",
-		"ie >= 11"
+		"defaults"
 	],
 	"devDependencies": {
 		"@babel/preset-env": "^7.18.0",
