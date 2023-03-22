@@ -3,3 +3,6 @@ node_modules
 
 # server credential are a secret!
 serverCredentials.json
+
+# this script should be build and copied
+dist/snippet.js

@@ -4,7 +4,7 @@ import SeznamAds from './ads/SeznamAds';
 import { ZoneNames } from './types/ads';
 import GoogleAds from './ads/GoogleAds';
 import { VIEWPORT_BREAKPOINT } from './constants';
-import StickySky from './StickySky';
+import StickySky from './StickySky/index';
 import AdSenseAds from './ads/AdSense';
 
 const setupAdvertisment = () => {

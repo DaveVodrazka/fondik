@@ -2,7 +2,11 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-	entry: { main: './src/main.ts', expose: './src/expose.ts' },
+	entry: {
+		main: './src/main.ts',
+		expose: './src/expose.ts',
+		snippet: './src/snippet.ts',
+	},
 	module: {
 		rules: [
 			{
