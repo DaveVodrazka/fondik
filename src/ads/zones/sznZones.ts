@@ -4,7 +4,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.LEADERBOARD,
 		{
-			zoneId: 118559,
+			zoneId: 320126,
 			width: 970,
 			height: 210,
 			id: 'ssp-zone-118559',
@@ -13,7 +13,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.TOP_SPONZOR,
 		{
-			zoneId: 118564,
+			zoneId: 320129,
 			id: 'ssp-zone-118564',
 			width: 300,
 			height: 300,
@@ -22,7 +22,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.SKY_SCRAPER,
 		{
-			zoneId: 118569,
+			zoneId: 320132,
 			id: 'ssp-zone-118569',
 			width: 300,
 			height: 600,
@@ -31,7 +31,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.RECTANGLE,
 		{
-			zoneId: 118579,
+			zoneId: 320138,
 			id: 'ssp-zone-118579',
 			width: 970,
 			height: 310,
@@ -40,7 +40,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.RECTANGLE2,
 		{
-			zoneId: 118574,
+			zoneId: 302599,
 			id: 'ssp-zone-118574',
 			width: 480,
 			height: 300,
@@ -49,7 +49,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.MOBILE_TOP,
 		{
-			zoneId: 118584,
+			zoneId: 320141,
 			id: 'ssp-zone-118584',
 			width: 480,
 			height: 480,
@@ -58,7 +58,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.MOBILE_MID,
 		{
-			zoneId: 118589,
+			zoneId: 320144,
 			id: 'ssp-zone-118589',
 			width: 480,
 			height: 480,
@@ -67,7 +67,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.MOBILE_BOT,
 		{
-			zoneId: 118594,
+			zoneId: 320150,
 			id: 'ssp-zone-118594',
 			width: 480,
 			height: 480,
