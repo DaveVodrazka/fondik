@@ -6,3 +6,6 @@ serverCredentials.json
 
 # this script should be build and copied
 dist/snippet.js
+
+# do not share your SSL keys
+ssl

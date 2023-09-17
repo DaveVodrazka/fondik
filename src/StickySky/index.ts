@@ -24,7 +24,11 @@ export default class StickySky {
 		this.preparePage();
 		this.createSky();
 
-		window.addEventListener('scroll', this.stick.bind(this));
+		// sometimes does not work without timeout
+		setTimeout(
+			() => window.addEventListener('scroll', () => this.stick()),
+			500
+		);
 	}
 
 	private preparePage() {

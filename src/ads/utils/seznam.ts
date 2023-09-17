@@ -86,7 +86,7 @@ export const prepareBranding = (): SznZone => {
 	);
 
 	return {
-		zoneId: 118559,
+		zoneId: 320126,
 		width: 2000,
 		id: 'ssp-branding-118559',
 		callback: handleResponse,

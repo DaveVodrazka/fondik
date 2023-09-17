@@ -40,7 +40,7 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 	[
 		ZoneNames.RECTANGLE2,
 		{
-			zoneId: 302599,
+			zoneId: 320135,
 			id: 'ssp-zone-118574',
 			width: 480,
 			height: 300,
