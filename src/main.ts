@@ -12,8 +12,8 @@ const setupAdvertisment = () => {
 	const pathname = window.location.pathname;
 	const countPaths = (pathname.match(/\//g) || []).length;
 
-	if (countPaths < 2) {
-		debug('HP or section - not calling any ads');
+	if (countPaths === 1) {
+		debug('HP - not calling any ads');
 		return;
 	}
 
@@ -21,6 +21,20 @@ const setupAdvertisment = () => {
 
 	if (utm && utm.indexOf('utm_source=www.seznam.cz') !== -1) {
 		const sznAdManager = new SeznamAds();
+
+		// SECTION
+		if (countPaths === 2) {
+			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
+				debug('seznam desktop ads');
+				new StickySky();
+				sznAdManager
+					.addZone(ZoneNames.LEADERBOARD)
+					.addZone(ZoneNames.RECTANGLE2)
+					.callAds();
+			}
+			return;
+		}
+
 		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 			debug('seznam desktop ads');
 			new StickySky();

@@ -97,9 +97,18 @@ export const prepareBranding = (): SznZone => {
 	};
 };
 
-export const fixLeaderboard = () =>
+export const fixLeaderboard = () => {
+	const wrapper = document.getElementsByClassName('leaderboardwrapper');
+	if (wrapper && wrapper.length > 0) {
+		(wrapper[0] as HTMLElement).style.display = 'block';
+	}
+	const leadElem = document.getElementsByClassName('leaderboard');
+	if (leadElem && leadElem.length > 0) {
+		(leadElem[0] as HTMLElement).style.display = 'block';
+	}
 	Array.prototype.slice
 		.call(document.querySelectorAll("[class^='dropdown-section']"), 0)
 		.forEach((e) => {
 			e.style.marginTop = '350px';
 		});
+};
