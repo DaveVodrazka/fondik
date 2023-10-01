@@ -13,7 +13,7 @@ const setupAdvertisment = () => {
 	const countPaths = (pathname.match(/\//g) || []).length;
 
 	if (countPaths === 1) {
-		debug('HP - not calling any ads');
+		debug('Homepage - not calling any ads');
 		return;
 	}
 
@@ -23,7 +23,7 @@ const setupAdvertisment = () => {
 		const sznAdManager = new SeznamAds();
 
 		// SECTION
-		if (countPaths === 2) {
+		if (pathname.startsWith('/kategorie/')) {
 			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 				debug('seznam desktop ads');
 				new StickySky();
