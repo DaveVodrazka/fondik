@@ -3,6 +3,7 @@ import { SznZone, SznZoneList, ZoneNames } from '../types/ads';
 import AdsManager from './AdsManager';
 import { fixLeaderboard, prepareBranding } from './utils/seznam';
 import { getZoneElementMap } from './zones/commonZones';
+import { sleep } from '../utils/utils';
 
 type SSSP = {
 	getAds: (z: SznZoneList) => void;
@@ -14,6 +15,36 @@ declare global {
 		sssp?: SSSP;
 	}
 }
+
+const moveMobileToMiddle = async (adElem: HTMLElement) => {
+	const INSERT_AFTER_PARAGRAPH = 4;
+
+	// wait one second for everything to be ready
+	await sleep(1000);
+	const richElements = document.getElementsByClassName('rich-text-block');
+
+	if (!richElements || richElements.length === 0) {
+		return;
+	}
+
+	const parent = richElements[0];
+
+	const paragraphs = Array.from(parent.children).filter(
+		(el) => el.tagName === 'P'
+	);
+
+	if (!paragraphs || paragraphs.length < INSERT_AFTER_PARAGRAPH + 1) {
+		return;
+	}
+
+	if (!adElem) {
+		return;
+	}
+
+	const target = paragraphs[INSERT_AFTER_PARAGRAPH - 1];
+
+	target.parentNode.insertBefore(adElem, target.nextSibling);
+};
 
 export default class SeznamAds extends AdsManager {
 	private zoneList: SznZoneList = [];
@@ -47,6 +78,10 @@ export default class SeznamAds extends AdsManager {
 			elem.className = 'textadblock';
 			elem.style.display = 'block';
 			elem.style.height = 'auto';
+		}
+		if (zone == ZoneNames.MOBILE_MID) {
+			const elem = getZoneElementMap().get(zone);
+			moveMobileToMiddle(elem);
 		}
 		this.zoneList.push(zoneData);
 		return this;
