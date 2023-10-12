@@ -3,6 +3,9 @@ import {
 	StickySkyCustomOptions,
 	StickySkyOptions,
 } from '../types/stickySky';
+import { debug } from '../utils/debug';
+
+const HOLDER_ID = 'sticky-sky-holder';
 
 export default class StickySky {
 	private options: StickySkyOptions = {
@@ -20,6 +23,16 @@ export default class StickySky {
 		for (const o in options) {
 			this.options[o] = options[o];
 		}
+
+		const previousHolder = document.getElementById(HOLDER_ID);
+
+		if (previousHolder) {
+			debug('Sticky sky already present, exiting');
+			return;
+		}
+
+		// no previous holder, set ID to the new one
+		this.holder.id = HOLDER_ID;
 
 		this.preparePage();
 		this.createSky();

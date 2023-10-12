@@ -42,8 +42,8 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 		{
 			zoneId: 320135,
 			id: 'ssp-zone-118574',
-			width: 480,
-			height: 300,
+			width: 111,
+			height: 111,
 		},
 	],
 	[

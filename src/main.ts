@@ -6,6 +6,7 @@ import GoogleAds from './ads/GoogleAds';
 import { VIEWPORT_BREAKPOINT } from './constants';
 import StickySky from './StickySky/index';
 import AdSenseAds from './ads/AdSense';
+import { zoneMap } from './ads/zones/sznZones';
 
 const setupAdvertisment = () => {
 	utmToLinks();
@@ -26,10 +27,23 @@ const setupAdvertisment = () => {
 		if (pathname.startsWith('/kategorie/')) {
 			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 				debug('seznam desktop ads');
-				new StickySky();
+
+				new StickySky({ top: 0 });
+
+				// rename RECTANGLE2 to RECTANGLE
+				const r2 = zoneMap.get(ZoneNames.RECTANGLE2);
+				const r = zoneMap.get(ZoneNames.RECTANGLE);
+				const rectangleElement = document.getElementById(r2.id);
+				if (rectangleElement) {
+					rectangleElement.id = r.id;
+					rectangleElement.style.width = r.width + 'px';
+					rectangleElement.style.height = r.height + 'px';
+				}
+
 				sznAdManager
 					.addZone(ZoneNames.LEADERBOARD)
-					.addZone(ZoneNames.RECTANGLE2)
+					.addZone(ZoneNames.RECTANGLE)
+					.addZone(ZoneNames.SKY_SCRAPER)
 					.callAds();
 			}
 			return;
