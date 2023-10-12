@@ -3,7 +3,7 @@ import { SznZone, SznZoneList, ZoneNames } from '../types/ads';
 import AdsManager from './AdsManager';
 import { fixLeaderboard, prepareBranding } from './utils/seznam';
 import { getZoneElementMap } from './zones/commonZones';
-import { sleep } from '../utils/utils';
+import { debug } from '../utils/debug';
 
 type SSSP = {
 	getAds: (z: SznZoneList) => void;
@@ -17,13 +17,17 @@ declare global {
 }
 
 const moveMobileToMiddle = async (adElem: HTMLElement) => {
+	if (!adElem) {
+		debug('MOVE MID MOBILE - no ad elem');
+		return;
+	}
+
 	const INSERT_AFTER_PARAGRAPH = 4;
 
-	// wait one second for everything to be ready
-	await sleep(1000);
 	const richElements = document.getElementsByClassName('rich-text-block');
 
 	if (!richElements || richElements.length === 0) {
+		debug('MOVE MID MOBILE - No element');
 		return;
 	}
 
@@ -34,14 +38,13 @@ const moveMobileToMiddle = async (adElem: HTMLElement) => {
 	);
 
 	if (!paragraphs || paragraphs.length < INSERT_AFTER_PARAGRAPH + 1) {
-		return;
-	}
-
-	if (!adElem) {
+		debug('MOVE MID MOBILE - not enough paragraphs');
 		return;
 	}
 
 	const target = paragraphs[INSERT_AFTER_PARAGRAPH - 1];
+
+	debug({ message: 'MOVE MID MOBILE - target', target });
 
 	target.parentNode.insertBefore(adElem, target.nextSibling);
 };
@@ -83,11 +86,74 @@ export default class SeznamAds extends AdsManager {
 			const elem = getZoneElementMap().get(zone);
 			moveMobileToMiddle(elem);
 		}
+		if (zone == ZoneNames.MOBILE_SMR) {
+			const target = document.getElementsByClassName('post-content-text');
+
+			if (!target || !target.length) {
+				return this;
+			}
+
+			const { id, height } = zoneMap.get(ZoneNames.MOBILE_SMR);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = id;
+			zoneElem.style.width = '100%';
+			zoneElem.style.height = height + 'px';
+			target[0].after(zoneElem);
+
+			debug({
+				message: 'Added MOBILE_SMR',
+				zoneData,
+				target: target[0],
+				zoneElem,
+			});
+		}
 		this.zoneList.push(zoneData);
 		return this;
 	}
 
 	executeQueue() {
 		window.sssp.getAds(this.zoneList);
+	}
+
+	setupMobileSection(): boolean {
+		const section = document.getElementsByClassName('content-section');
+
+		if (!section || !section.length) {
+			return false;
+		}
+
+		const elems = section[0].getElementsByClassName('flex-wrapper');
+
+		if (!elems || !elems.length) {
+			return false;
+		}
+
+		const arr = Array.from(elems);
+
+		console.log(arr);
+
+		const TOP = zoneMap.get(ZoneNames.MOBILE_TOP);
+		const MID = zoneMap.get(ZoneNames.MOBILE_MID);
+		const BOT = zoneMap.get(ZoneNames.MOBILE_BOT);
+
+		if (arr.length > 3) {
+			const el = document.createElement('div');
+			el.id = TOP.id;
+			arr[2].after(el);
+		}
+
+		if (arr.length > 5) {
+			const el = document.createElement('div');
+			el.id = MID.id;
+			arr[4].after(el);
+		}
+
+		if (arr.length > 7) {
+			const el = document.createElement('div');
+			el.id = BOT.id;
+			arr[6].after(el);
+		}
+
+		return true;
 	}
 }

@@ -73,4 +73,13 @@ export const zoneMap = new Map<ZoneNames, SznZone>([
 			height: 480,
 		},
 	],
+	[
+		ZoneNames.MOBILE_SMR,
+		{
+			zoneId: 320147,
+			id: 'ssp-zone-320147',
+			width: 111,
+			height: 111,
+		},
+	],
 ]);

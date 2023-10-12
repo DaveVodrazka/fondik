@@ -26,7 +26,7 @@ const setupAdvertisment = () => {
 		// SECTION
 		if (pathname.startsWith('/kategorie/')) {
 			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
-				debug('seznam desktop ads');
+				debug('seznam desktop ads - SECTION');
 
 				new StickySky({ top: 0 });
 
@@ -45,6 +45,18 @@ const setupAdvertisment = () => {
 					.addZone(ZoneNames.RECTANGLE)
 					.addZone(ZoneNames.SKY_SCRAPER)
 					.callAds();
+			} else {
+				debug('seznam mobile ads - SECTION');
+
+				const mobileAdsReady = sznAdManager.setupMobileSection();
+
+				if (mobileAdsReady) {
+					sznAdManager
+						.addZone(ZoneNames.MOBILE_TOP)
+						.addZone(ZoneNames.MOBILE_MID)
+						.addZone(ZoneNames.MOBILE_BOT)
+						.callAds();
+				}
 			}
 			return;
 		}
@@ -65,6 +77,7 @@ const setupAdvertisment = () => {
 				.addZone(ZoneNames.MOBILE_TOP)
 				.addZone(ZoneNames.MOBILE_MID)
 				.addZone(ZoneNames.MOBILE_BOT)
+				.addZone(ZoneNames.MOBILE_SMR)
 				.callAds();
 		}
 	} else {

@@ -8,6 +8,7 @@ export enum ZoneNames {
 	MOBILE_TOP,
 	MOBILE_MID,
 	MOBILE_BOT,
+	MOBILE_SMR,
 }
 
 type SznElement = {
