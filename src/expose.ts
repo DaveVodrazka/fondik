@@ -1,10 +1,10 @@
-import StickySky from './StickySky/index';
+import { setupStickySky } from './StickySky/index';
 import SeznamAds from './ads/SeznamAds';
 import { utmToLinks } from './utils/persistentUtm';
 import { ZoneNames } from './types/ads';
 
 const fondik = {
-	StickySky,
+	setupStickySky,
 	SeznamAds,
 	ZoneNames,
 };

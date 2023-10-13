@@ -4,7 +4,7 @@ import SeznamAds from './ads/SeznamAds';
 import { ZoneNames } from './types/ads';
 import GoogleAds from './ads/GoogleAds';
 import { VIEWPORT_BREAKPOINT } from './constants';
-import StickySky from './StickySky/index';
+import { setupStickySky } from './StickySky/index';
 import AdSenseAds from './ads/AdSense';
 import { zoneMap } from './ads/zones/sznZones';
 
@@ -28,7 +28,7 @@ const setupAdvertisment = () => {
 			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 				debug('seznam desktop ads - SECTION');
 
-				new StickySky({ top: 0 });
+				setupStickySky({ top: 0 });
 
 				// rename RECTANGLE2 to RECTANGLE
 				const r2 = zoneMap.get(ZoneNames.RECTANGLE2);
@@ -63,7 +63,7 @@ const setupAdvertisment = () => {
 
 		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 			debug('seznam desktop ads');
-			new StickySky();
+			setupStickySky();
 			sznAdManager
 				.addZone(ZoneNames.LEADERBOARD)
 				.addZone(ZoneNames.TOP_SPONZOR)
@@ -83,7 +83,7 @@ const setupAdvertisment = () => {
 	} else {
 		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 			debug('google desktop ads');
-			new StickySky({ top: 0, stickyTopSponsor: true });
+			setupStickySky({ top: 0, stickyTopSponsor: true });
 			new GoogleAds()
 				.addZone(ZoneNames.TOP_SPONZOR)
 				.addZone(ZoneNames.SKY_SCRAPER)
