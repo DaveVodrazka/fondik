@@ -16,6 +16,8 @@ const stick = (
 	sky: HTMLElement,
 	options: StickySkyOptions
 ) => {
+	debug({ message: 'Stick function called', holder, sky });
+
 	const rect = holder.getBoundingClientRect();
 	if (rect.bottom > options.height && rect.top < 0) {
 		sky.style.position = 'fixed';
@@ -96,4 +98,5 @@ export const setupStickySky = (options?: Partial<StickySkyOptions>) => {
 	preparePage(holder, composedOptions);
 	createSky(holder, sky, composedOptions);
 	window.addEventListener('scroll', () => stick(holder, sky, composedOptions));
+	debug('Set scroll event listener');
 };
