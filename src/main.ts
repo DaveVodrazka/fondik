@@ -11,17 +11,22 @@ import { zoneMap } from './ads/zones/sznZones';
 const setupAdvertisment = () => {
 	utmToLinks();
 	const pathname = window.location.pathname;
-	const countPaths = (pathname.match(/\//g) || []).length;
-
-	if (countPaths === 1) {
-		debug('Homepage - not calling any ads');
-		return;
-	}
-
 	const utm = getUtm();
 
 	if (utm && utm.indexOf('utm_source=www.seznam.cz') !== -1) {
 		const sznAdManager = new SeznamAds();
+
+		// HOME PAGE
+		if (pathname === '/') {
+			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
+				debug('seznam desktop ads - HOMEPAGE');
+				sznAdManager.homepageDesktop();
+			} else {
+				debug('seznam mobile ads - HOMEPAGE');
+				sznAdManager.homepageMobile();
+			}
+			return;
+		}
 
 		// SECTION
 		if (pathname.startsWith('/kategorie/')) {

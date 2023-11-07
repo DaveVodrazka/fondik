@@ -156,4 +156,64 @@ export default class SeznamAds extends AdsManager {
 
 		return true;
 	}
+
+	homepageDesktop() {
+		// remove fondik doporucuje
+		const fondikDoporucujeElem =
+			document.getElementsByClassName('fondik-doporucuje');
+		if (fondikDoporucujeElem && fondikDoporucujeElem[0]) {
+			fondikDoporucujeElem[0].remove();
+		}
+
+		// append add before postsBlock
+		const postsBlock = document.getElementsByClassName('posts-block hp-bottom');
+		if (postsBlock && postsBlock[0]) {
+			const zone = zoneMap.get(ZoneNames.RECTANGLE2);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			postsBlock[0].parentNode.insertBefore(zoneElem, postsBlock[0]);
+			this.addZone(ZoneNames.RECTANGLE2);
+		}
+
+		// add Leaderboard
+		this.addZone(ZoneNames.LEADERBOARD);
+
+		this.callAds();
+	}
+
+	homepageMobile() {
+		// append add before postsBlock
+		const postsBlock = document.getElementsByClassName('posts-block hp-bottom');
+		if (postsBlock && postsBlock[0]) {
+			const zone = zoneMap.get(ZoneNames.MOBILE_TOP);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			zoneElem.style.marginBottom = '20px';
+			postsBlock[0].parentNode.insertBefore(zoneElem, postsBlock[0]);
+			this.addZone(ZoneNames.MOBILE_TOP);
+		}
+
+		const listParent = document.getElementsByClassName(
+			'collection-list-2 w-dyn-items'
+		);
+		if (listParent[0] && listParent[0].children) {
+			const list = listParent[0].children;
+			if (list.length > 3) {
+				const zone = zoneMap.get(ZoneNames.MOBILE_MID);
+				const zoneElem = document.createElement('div');
+				zoneElem.id = zone.id;
+				list[2].parentNode.insertBefore(zoneElem, list[2]);
+				this.addZone(ZoneNames.MOBILE_MID);
+			}
+			if (list.length > 6) {
+				const zone = zoneMap.get(ZoneNames.MOBILE_BOT);
+				const zoneElem = document.createElement('div');
+				zoneElem.id = zone.id;
+				list[4].parentNode.insertBefore(zoneElem, list[4]);
+				this.addZone(ZoneNames.MOBILE_BOT);
+			}
+		}
+
+		this.callAds();
+	}
 }
