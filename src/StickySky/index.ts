@@ -11,27 +11,37 @@ const DEFAULT_OPTIONS: StickySkyOptions = {
 	stickyTopSponsor: false,
 };
 
-const stick = (
-	holder: HTMLElement,
-	sky: HTMLElement,
-	options: StickySkyOptions
-) => {
-	debug({ message: 'Stick function called', holder, sky });
+const stickCallbackFactory = (options: StickySkyOptions): (() => void) => {
+	const { height } = options;
 
-	const rect = holder.getBoundingClientRect();
-	if (rect.bottom > options.height && rect.top < 0) {
-		sky.style.position = 'fixed';
-		sky.style.top = '25px';
-		sky.style.bottom = '';
-	} else if (rect.bottom <= 600) {
-		sky.style.position = 'absolute';
-		sky.style.top = '';
-		sky.style.bottom = '0';
-	} else if (rect.top >= 0) {
-		sky.style.position = 'absolute';
-		sky.style.top = '25px';
-		sky.style.bottom = '';
-	}
+	return () => {
+		const holder = document.getElementById(HOLDER_ID) as HTMLDivElement;
+
+		if (!holder) {
+			return;
+		}
+
+		const sky = holder.firstChild as HTMLDivElement;
+
+		if (!sky) {
+			return;
+		}
+
+		const rect = holder.getBoundingClientRect();
+		if (rect.bottom > height && rect.top < 0) {
+			sky.style.position = 'fixed';
+			sky.style.top = '25px';
+			sky.style.bottom = '';
+		} else if (rect.bottom <= 600) {
+			sky.style.position = 'absolute';
+			sky.style.top = '';
+			sky.style.bottom = '0';
+		} else if (rect.top >= 0) {
+			sky.style.position = 'absolute';
+			sky.style.top = '25px';
+			sky.style.bottom = '';
+		}
+	};
 };
 
 const preparePage = (holder: HTMLElement, options: StickySkyOptions) => {
@@ -97,6 +107,8 @@ export const setupStickySky = (options?: Partial<StickySkyOptions>) => {
 
 	preparePage(holder, composedOptions);
 	createSky(holder, sky, composedOptions);
-	window.addEventListener('scroll', () => stick(holder, sky, composedOptions));
+
+	const cb = stickCallbackFactory(composedOptions);
+	window.addEventListener('scroll', cb);
 	debug('Set scroll event listener');
 };
