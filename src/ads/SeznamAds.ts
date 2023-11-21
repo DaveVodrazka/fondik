@@ -158,10 +158,18 @@ export default class SeznamAds extends AdsManager {
 	}
 
 	homepageDesktop() {
-		// remove fondik doporucuje
+		// replace fondik doporucuje with TOP_SPONZOR
 		const fondikDoporucujeElem =
 			document.getElementsByClassName('fondik-doporucuje');
 		if (fondikDoporucujeElem && fondikDoporucujeElem[0]) {
+			const zone = zoneMap.get(ZoneNames.TOP_SPONZOR);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			fondikDoporucujeElem[0].parentNode.insertBefore(
+				zoneElem,
+				fondikDoporucujeElem[0]
+			);
+			this.addZone(ZoneNames.TOP_SPONZOR);
 			fondikDoporucujeElem[0].remove();
 		}
 
@@ -173,6 +181,16 @@ export default class SeznamAds extends AdsManager {
 			zoneElem.id = zone.id;
 			postsBlock[0].parentNode.insertBefore(zoneElem, postsBlock[0]);
 			this.addZone(ZoneNames.RECTANGLE2);
+		}
+
+		// add sky
+		const sideBlocks = document.getElementsByClassName('side-posts-block');
+		if (sideBlocks && sideBlocks.length === 2) {
+			const zone = zoneMap.get(ZoneNames.SKY_SCRAPER);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			sideBlocks[1].parentNode.insertBefore(zoneElem, sideBlocks[1]);
+			this.addZone(ZoneNames.SKY_SCRAPER);
 		}
 
 		// add Leaderboard
