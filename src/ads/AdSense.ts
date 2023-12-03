@@ -42,9 +42,12 @@ export default class AdSenseAds extends AdsManager {
 		ins.setAttribute('data-ad-client', 'ca-pub-1062420095711039');
 		script.src = this.scriptSrc;
 
-		zone.style.display = 'block';
-		zone.appendChild(ins);
-		zone.appendChild(script);
+		if (zone) {
+			zone.style.display = 'block';
+			zone.appendChild(ins);
+			zone.appendChild(script);
+		}
+
 		this.adCount++;
 	}
 
@@ -56,7 +59,11 @@ export default class AdSenseAds extends AdsManager {
 		if (zone == ZoneNames.RECTANGLE2) {
 			zoneElement.style.width = window.innerWidth < 1135 ? '600px' : '750px';
 		}
-		this.appendAd(adSenseCodeMap.get(zone), zoneElement);
+		const z = adSenseCodeMap.get(zone);
+
+		if (z) {
+			this.appendAd(z, zoneElement);
+		}
 		return this;
 	}
 
