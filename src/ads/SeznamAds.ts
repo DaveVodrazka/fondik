@@ -136,21 +136,31 @@ export default class SeznamAds extends AdsManager {
 		const MID = zoneMap.get(ZoneNames.MOBILE_MID);
 		const BOT = zoneMap.get(ZoneNames.MOBILE_BOT);
 
+		if (arr.length <= 3) {
+			const el = document.createElement('div');
+			el.id = TOP.id;
+			el.style.margin = 'auto';
+			arr[0].after(el);
+		}
+
 		if (arr.length > 3) {
 			const el = document.createElement('div');
 			el.id = TOP.id;
+			el.style.margin = 'auto';
 			arr[2].after(el);
 		}
 
 		if (arr.length > 5) {
 			const el = document.createElement('div');
 			el.id = MID.id;
+			el.style.margin = 'auto';
 			arr[4].after(el);
 		}
 
 		if (arr.length > 7) {
 			const el = document.createElement('div');
 			el.id = BOT.id;
+			el.style.margin = 'auto';
 			arr[6].after(el);
 		}
 
@@ -174,14 +184,14 @@ export default class SeznamAds extends AdsManager {
 		}
 
 		// append add before postsBlock
-		const postsBlock = document.getElementsByClassName('posts-block hp-bottom');
-		if (postsBlock && postsBlock[0]) {
-			const zone = zoneMap.get(ZoneNames.RECTANGLE2);
-			const zoneElem = document.createElement('div');
-			zoneElem.id = zone.id;
-			postsBlock[0].parentNode.insertBefore(zoneElem, postsBlock[0]);
-			this.addZone(ZoneNames.RECTANGLE2);
-		}
+		// const postsBlock = document.getElementsByClassName('posts-block hp-bottom');
+		// if (postsBlock && postsBlock[0]) {
+		// 	const zone = zoneMap.get(ZoneNames.RECTANGLE2);
+		// 	const zoneElem = document.createElement('div');
+		// 	zoneElem.id = zone.id;
+		// 	postsBlock[0].parentNode.insertBefore(zoneElem, postsBlock[0]);
+		// 	this.addZone(ZoneNames.RECTANGLE2);
+		// }
 
 		// add sky
 		const sideBlocks = document.getElementsByClassName('side-posts-block');
@@ -191,6 +201,18 @@ export default class SeznamAds extends AdsManager {
 			zoneElem.id = zone.id;
 			sideBlocks[1].parentNode.insertBefore(zoneElem, sideBlocks[1]);
 			this.addZone(ZoneNames.SKY_SCRAPER);
+		}
+
+		// add rectange
+		const contentSection = document.querySelector(
+			'body > div.content-section > div:nth-child(2)'
+		);
+		if (contentSection) {
+			const zone = zoneMap.get(ZoneNames.RECTANGLE);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			contentSection.insertAdjacentElement('beforebegin', zoneElem);
+			this.addZone(ZoneNames.RECTANGLE);
 		}
 
 		// add Leaderboard
@@ -233,5 +255,18 @@ export default class SeznamAds extends AdsManager {
 		}
 
 		this.callAds();
+	}
+
+	// in order for RECTANGLE to have full width 970
+	// it must be moved further to the bottom of the page
+	moveRectangleToBottom() {
+		// move it to the end of this div
+		const postContent = document.getElementsByClassName('content-section')[0];
+		if (!postContent) {
+			return;
+		}
+
+		const elem = getZoneElementMap().get(ZoneNames.RECTANGLE);
+		postContent.insertAdjacentElement('afterend', elem);
 	}
 }

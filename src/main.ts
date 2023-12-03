@@ -45,6 +45,9 @@ const setupAdvertisment = () => {
 					rectangleElement.style.height = r.height + 'px';
 				}
 
+				// move RECTANGLE so that it can have width 970
+				sznAdManager.moveRectangleToBottom();
+
 				sznAdManager
 					.addZone(ZoneNames.LEADERBOARD)
 					.addZone(ZoneNames.RECTANGLE)
