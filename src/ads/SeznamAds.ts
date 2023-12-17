@@ -4,6 +4,7 @@ import AdsManager from './AdsManager';
 import { fixLeaderboard, prepareBranding } from './utils/seznam';
 import { getZoneElementMap } from './zones/commonZones';
 import { debug } from '../utils/debug';
+import { VIEWPORT_BREAKPOINT } from '../constants';
 
 type SSSP = {
 	getAds: (z: SznZoneList) => void;
@@ -254,6 +255,39 @@ export default class SeznamAds extends AdsManager {
 			}
 		}
 
+		this.callAds();
+	}
+
+	legacySection() {
+		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
+			debug('seznam desktop ads');
+			// add Leaderboard
+			this.addZone(ZoneNames.LEADERBOARD);
+			const parent = document.getElementsByClassName(
+				'rich-text-block w-richtext'
+			)[0];
+			if (!parent) {
+				return;
+			}
+			const zone = zoneMap.get(ZoneNames.RECTANGLE);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			parent.appendChild(zoneElem);
+			this.addZone(ZoneNames.RECTANGLE);
+		} else {
+			debug('seznam mobile ads');
+			const parent = document.getElementsByClassName(
+				'rich-text-block w-richtext'
+			)[0];
+			if (!parent) {
+				return;
+			}
+			const zone = zoneMap.get(ZoneNames.MOBILE_TOP);
+			const zoneElem = document.createElement('div');
+			zoneElem.id = zone.id;
+			parent.appendChild(zoneElem);
+			this.addZone(ZoneNames.MOBILE_TOP);
+		}
 		this.callAds();
 	}
 

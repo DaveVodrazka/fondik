@@ -69,25 +69,32 @@ const setupAdvertisment = () => {
 			return;
 		}
 
-		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
-			debug('seznam desktop ads');
-			setupStickySky();
-			sznAdManager
-				.addZone(ZoneNames.LEADERBOARD)
-				.addZone(ZoneNames.TOP_SPONZOR)
-				.addZone(ZoneNames.SKY_SCRAPER)
-				.addZone(ZoneNames.RECTANGLE)
-				.addZone(ZoneNames.RECTANGLE2)
-				.callAds();
-		} else {
-			debug('seznam mobile ads');
-			sznAdManager
-				.addZone(ZoneNames.MOBILE_TOP)
-				.addZone(ZoneNames.MOBILE_MID)
-				.addZone(ZoneNames.MOBILE_BOT)
-				.addZone(ZoneNames.MOBILE_SMR)
-				.callAds();
+		// POST
+		if (pathname.startsWith('/clanky/')) {
+			if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
+				debug('seznam desktop ads');
+				setupStickySky();
+				sznAdManager
+					.addZone(ZoneNames.LEADERBOARD)
+					.addZone(ZoneNames.TOP_SPONZOR)
+					.addZone(ZoneNames.SKY_SCRAPER)
+					.addZone(ZoneNames.RECTANGLE)
+					.addZone(ZoneNames.RECTANGLE2)
+					.callAds();
+			} else {
+				debug('seznam mobile ads');
+				sznAdManager
+					.addZone(ZoneNames.MOBILE_TOP)
+					.addZone(ZoneNames.MOBILE_MID)
+					.addZone(ZoneNames.MOBILE_BOT)
+					.addZone(ZoneNames.MOBILE_SMR)
+					.callAds();
+			}
+			return;
 		}
+
+		// Other (legacy category)
+		sznAdManager.legacySection();
 	} else {
 		if (window.innerWidth >= VIEWPORT_BREAKPOINT) {
 			debug('google desktop ads');
